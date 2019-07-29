@@ -50,7 +50,7 @@ const actions = {
   loadDataset ({commit, state}, payload) {
     if (state.noMore) return
     request
-      .get(`/static/data/${datasetUri[payload.name]}`)
+      .get(`./static/data/${datasetUri[payload.name]}`)
       // .use(jsonp)
       .end((err, res) => {
         if (!err) {
