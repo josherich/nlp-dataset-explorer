@@ -1,0 +1,133 @@
+<template>
+  <div class="home-view has-header">
+    <!-- <sub-nav mold="quickNav"></sub-nav> -->
+    <!-- <search-filter></search-filter> -->
+    <div class="search">
+      <form id="search_form" onsubmit="return false">
+        <input
+          type="text"
+          name="query"
+          v-model.trim.lazy="queryStr"
+          placeholder="Search sentences (more than 3 chars)">
+        <a href="javascript:void(0);" @click="query()">Search</a>
+      </form>
+    </div>
+
+    <template>
+      <div class="about">
+        <a href="https://gluebenchmark.com/tasks">About This Task</a>
+      </div>
+    </template>
+
+    <d-list :ds_name="dataset" :items="data"></d-list>
+    <button @click="onLoadMore" class="block-button">More</button>
+  </div>
+</template>
+
+<script>
+import { mapState, mapActions } from 'vuex'
+
+import InfiniteLoading from 'vue-infinite-loading'
+import DList from '../components/DList'
+
+export default {
+  name: 'home-view',
+  components: { DList, InfiniteLoading },
+  data () {
+    return {
+      queryStr: ''
+    }
+  },
+  computed: {
+    // Getting Vuex State from store/modules/activities
+    ...mapState({
+      data: state => state.docs.data,
+      dataset: state => state.docs.dataset,
+      noMore: state => state.docs.noMore
+    })
+  },
+  methods: {
+    // Dispatching Actions
+    ...mapActions([
+      'loadDataset',
+      'loadMoreRows'
+    ]),
+    query: function () {
+      if (this.queryStr.length === 0) {
+        this.loadDataset({name: this.dataset})
+        return
+      }
+      if (this.queryStr) {
+        // Dispatching query
+        this.$store.dispatch({
+          type: 'querySentence',
+          queryStr: this.queryStr
+        })
+      }
+    },
+    onLoadMore: function () {
+      this.loadMoreRows()
+    }
+  },
+  created () {
+    this.loadDataset({name: 'WNLI'})
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.sub-nav {
+  margin: 0 1.8rem;
+  padding-top: 0.2rem;
+}
+.about {
+  text-align: right;
+  font-size: 120%;
+  margin: 2rem 0 0 0;
+}
+.d-list {
+  margin-top: 2rem;
+}
+.search {
+  padding: 0.7rem 2rem;
+  border-bottom: 0.1rem solid #F2F2F2;
+  overflow: hidden;
+
+  input {
+    width: 85%;
+    height: 3rem;
+    padding: 0.5rem 0.8rem;
+    box-sizing: border-box;
+    font-size: 1.4rem;
+    color: #111;
+    background: #f5f5f5;
+    border-radius: 0.3rem;
+    border: 0;
+    outline: 0;
+  }
+
+  a {
+    display: inline-block;
+    float: right;
+    width: 10%;
+    height: 3rem;
+    padding-left: 5%;
+    line-height: 3rem;
+    font-size: 1.4rem;
+    color: #333;
+    text-decoration: none;
+  }
+}
+.submit {
+  cursor: pointer;
+  width: 100%;
+  padding: 1.2rem 2.6rem;
+  margin-top: 1rem;
+  font-size: 1.7rem;
+  text-align: center;
+  color: #fff;
+  background: #17AA52;
+  border: 0.1rem solid #17AA52;
+  border-radius: 0.3rem;
+}
+</style>
