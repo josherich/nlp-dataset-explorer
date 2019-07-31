@@ -7,7 +7,7 @@
     </h1>
     <ul v-if="showOptions" class="nav-options">
       <template v-for="d in datasets">
-        <li @click="onLoadOption(d)">{{d}}</li>
+        <li><router-link :to="{ name: 'HomeView', query: { dataset: d }}">{{d}}</router-link></li>
       </template>
     </ul>
 
@@ -28,7 +28,7 @@ export default {
   name: 'header-bar',
   data () {
     return {
-      datasets: ['WNLI', 'QNLI', 'QQP', 'RTE', 'SST-2', 'STS-B', 'DIAGNOSTICS'],
+      datasets: ['WNLI', 'QNLI', 'QQP', 'RTE', 'SST-2', 'STS-B', 'DIAGNOSTICS', 'DPR'],
       showOptions: false
     }
   },

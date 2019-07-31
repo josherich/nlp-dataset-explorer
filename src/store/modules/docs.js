@@ -17,17 +17,32 @@ const datasetUri = {
   'RTE': 'RTE/dev.tsv',
   'SST-2': 'SST-2/dev.tsv',
   'STS-B': 'STS-B/dev.tsv',
-  'DIAGNOSTICS': 'diagnostics/diagnostic-full.tsv'
+  'DIAGNOSTICS': 'diagnostics/diagnostic-full.tsv',
+  'DPR': 'DPR/dpr_data.txt'
 }
 
 const parseTsv = (content) => {
-  return content.split('\n').map((row) => row.split('\t'))
+  return content.split('\n').map(row => row.split('\t'))
+}
+
+const parseDPR = (content) => {
+  return content.split('\n\n').map(rows => {
+    return rows.split('\n').map(col => col.split(': ')[1])
+  })
 }
 
 const mutations = {
   loadDataset (state, payload) {
     state.page = 1
-    state._data = parseTsv(payload.res)
+
+    if (payload.name.indexOf('DPR') > -1) {
+      state._data = parseDPR(payload.res)
+    } else if (payload.name.indexOf('.tsv') > -1) {
+      state._data = parseTsv(payload.res)
+    } else {
+      state._data = parseTsv(payload.res)
+    }
+
     state.data = state._data.slice(0, state.page * state.perPage)
     state.dataset = payload.name.split('/')[0].toUpperCase()
     state.page += 1

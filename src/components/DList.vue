@@ -113,6 +113,21 @@
       </div>
     </template>
 
+    <template v-if="ds_name === 'DPR'" v-for="(item, index) in items">
+      <div v-if="index === 0" class="row row-head">
+          <span class="col-index">index</span>
+          <span class="col-label">label</span>
+          <span class="col-sent">premise</span>
+          <span class="col-sent">Hypothesis</span>
+      </div>
+      <div v-else class="row">
+          <span class="col-index">{{item[1]}}</span>
+          <span class="col-label">{{item[4]}}</span>
+          <span class="col-sent">{{item[2]}}</span>
+          <span class="col-sent">{{item[3]}}</span>
+      </div>
+    </template>
+
     <template v-if="ds_name === 'basic'">
       <ul class="basic">
         <li v-for="item in items">

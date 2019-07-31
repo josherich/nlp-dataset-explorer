@@ -46,6 +46,12 @@ export default {
       noMore: state => state.docs.noMore
     })
   },
+  watch: {
+    '$route' (to, from) {
+      const name = this.$route.query.dataset || 'WNLI'
+      this.loadDataset({name: name})
+    }
+  },
   methods: {
     // Dispatching Actions
     ...mapActions([
@@ -70,7 +76,8 @@ export default {
     }
   },
   created () {
-    this.loadDataset({name: 'WNLI'})
+    const name = this.$route.query.dataset || 'WNLI'
+    this.loadDataset({name: name})
   }
 }
 </script>
