@@ -15,7 +15,12 @@
 
     <template>
       <div class="about">
-        <a href="https://gluebenchmark.com/tasks">About This Task</a>
+        <template v-if="$route.query.dataset == 'DPR'">
+          <a href="https://aclweb.org/anthology/papers/I/I17/I17-1100/">About This Task</a>
+        </template>
+        <template v-else>
+          <a href="https://gluebenchmark.com/tasks">About This Task</a>
+        </template>
       </div>
     </template>
 
@@ -86,6 +91,13 @@ export default {
 .sub-nav {
   margin: 0 1.8rem;
   padding-top: 0.2rem;
+}
+@media (max-width: 768px) {
+  .home-view {
+    .about {
+      margin: 2rem 1rem 0 1rem;
+    }
+  }
 }
 .about {
   text-align: right;

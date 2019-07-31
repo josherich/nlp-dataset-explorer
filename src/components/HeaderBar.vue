@@ -7,7 +7,7 @@
     </h1>
     <ul v-if="showOptions" class="nav-options">
       <template v-for="d in datasets">
-        <li><router-link :to="{ name: 'HomeView', query: { dataset: d }}">{{d}}</router-link></li>
+        <li @click="onLoadOption"><router-link :to="{ name: 'HomeView', query: { dataset: d }}">{{d}}</router-link></li>
       </template>
     </ul>
 
@@ -49,7 +49,6 @@ export default {
       this.showOptions = true
     },
     onLoadOption: function (d) {
-      this.loadDataset({name: d})
       this.showOptions = false
     }
   }
@@ -57,6 +56,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@media (max-width: 768px) {
+  .title {
+    font-size: 105%;
+  }
+}
 .header-bar {
   .title {
     flex: 1;
@@ -77,9 +81,11 @@ export default {
     justify-content: flex-end;
     text-align: right;
     position: absolute;
-    right: 2rem;
-    top: 1rem;
+    right: 0rem;
+    top: 0rem;
     background: white;
+    padding: 5px 14px;
+    border: 1px solid #eee;
     li {
       display: block;
       padding: 1rem 0;

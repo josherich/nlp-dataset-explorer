@@ -168,6 +168,11 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+@media (max-width: 768px) {
+  .d-list {
+    margin: 0 8px;
+  }
+}
 .d-list {
   .row {
     margin: 2em 0;
