@@ -52,8 +52,8 @@
       </div>
     </template>
 
-    <!-- id__qid1__qid2__question1__question2__is_duplicate -->
     <template v-if="ds_name === 'QQP'" v-for="(item, index) in items">
+      <!-- id__qid1__qid2__question1__question2__is_duplicate -->
       <div v-if="index === 0" class="row row-head">
           <span class="col-index">{{item[0]}}</span>
           <span class="col-label">{{item[5]}}</span>
@@ -68,8 +68,8 @@
       </div>
     </template>
 
-    <!-- index__sentence1__sentence2__label -->
     <template v-if="ds_name === 'RTE'" v-for="(item, index) in items">
+      <!-- index__sentence1__sentence2__label -->
       <div v-if="index === 0" class="row row-head">
           <span class="col-index">{{item[0]}}</span>
           <span class="col-label">{{item[3]}}</span>
@@ -97,8 +97,8 @@
       </div>
     </template>
 
-    <!-- index__genre__filename__year__old_index__source1__source2__sentence1__sentence2__score -->
     <template v-if="ds_name === 'STS-B'" v-for="(item, index) in items">
+      <!-- index__genre__filename__year__old_index__source1__source2__sentence1__sentence2__score -->
       <div v-if="index === 0" class="row row-head">
           <span class="col-index">{{item[0]}}</span>
           <span class="col-label">{{item[9]}}</span>
@@ -125,6 +125,37 @@
           <span class="col-label">{{item[4]}}</span>
           <span class="col-sent">{{item[2]}}</span>
           <span class="col-sent">{{item[3]}}</span>
+      </div>
+    </template>
+
+    <template v-if="ds_name === 'CMRC' || ds_name === 'DRCD'" v-for="(item, index) in items">
+      <div class="row-block">
+
+        <div class="title">{{item['title']}}</div>
+
+        <template v-for="(row, ri) in item['paragraphs']">
+          <div class="paragraph">
+            <p>{{row['context']}}</p>
+
+            <div v-for="(q, qi) in row['qas']">
+              <p>{{q['question']}}</p>
+
+              <div class="answers">
+                <span v-for="(a, ai) in q['answers']">
+                  <div>{{a['text']}}</div><div class="annotate-id">{{a['id']}}</div>
+                </span>
+              </div>
+
+              <div class="answers">
+                <span v-for="(a, ai) in q['answers']">
+                  <div>{{a['answer_start']}}</div>
+                </span>
+              </div>
+
+            </div>
+          </div>
+
+        </template>
       </div>
     </template>
 
@@ -158,6 +189,14 @@ export default {
     return {
     }
   },
+  methods: {
+    addLocation: function (text, ids) {
+      ids.map(e => {
+        text.splice(ids, 0, '@')
+      })
+      return text
+    }
+  },
   filters: {
     subStr: function (value) {
       let newVal = value.replace(/<.*?>/g, '')
@@ -173,11 +212,38 @@ export default {
     margin: 0 8px;
   }
 }
+p {
+  line-height: 130%;
+}
+.title {
+  font-weight: bold;
+}
+.paragraph {
+  padding: 2rem 0;
+  border-bottom: 1px solid #eee;
+}
 .d-list {
+  .answers {
+    margin-left: 2rem;
+    color: #aaa;
+    .annotate-id {
+      font-size: 80%;
+    }
+    > span {
+      margin-right: 1rem;
+    }
+    div {
+      display: inline-block;
+    }
+  }
   .row {
     margin: 2em 0;
     font-size: 150%;
     display: flex;
+  }
+  .row-block {
+    margin: 2em 0;
+    font-size: 150%;
   }
   .row-head {
     padding-bottom: 1rem;

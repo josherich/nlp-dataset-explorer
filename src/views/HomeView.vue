@@ -18,6 +18,12 @@
         <template v-if="$route.query.dataset == 'DPR'">
           <a href="https://aclweb.org/anthology/papers/I/I17/I17-1100/">About This Task</a>
         </template>
+        <template v-else-if="$route.query.dataset == 'CMRC'">
+          <a href="https://github.com/ymcui/cmrc2018">About This Task</a>
+        </template>
+        <template v-else-if="$route.query.dataset == 'DRCD'">
+          <a href="https://github.com/DRCKnowledgeTeam/DRCD">About This Task</a>
+        </template>
         <template v-else>
           <a href="https://gluebenchmark.com/tasks">About This Task</a>
         </template>

@@ -18,11 +18,18 @@ const datasetUri = {
   'SST-2': 'SST-2/dev.tsv',
   'STS-B': 'STS-B/dev.tsv',
   'DIAGNOSTICS': 'diagnostics/diagnostic-full.tsv',
-  'DPR': 'DPR/dpr_data.txt'
+  'DPR': 'DPR/dpr_data.txt',
+  'CMRC': 'CMRC/cmrc2018_dev.json',
+  'DRCD': 'DRCD/DRCD_dev.json'
 }
 
 const parseTsv = (content) => {
   return content.split('\n').map(row => row.split('\t'))
+}
+
+const parseJSON = (content) => {
+  // this is SQuAD style json
+  return JSON.parse(content)['data']
 }
 
 const parseDPR = (content) => {
@@ -34,16 +41,20 @@ const parseDPR = (content) => {
 const mutations = {
   loadDataset (state, payload) {
     state.page = 1
+    const format = datasetUri[payload.name].split('.')[1]
 
     if (payload.name.indexOf('DPR') > -1) {
       state._data = parseDPR(payload.res)
-    } else if (payload.name.indexOf('.tsv') > -1) {
+    } else if (format.indexOf('tsv') > -1) {
       state._data = parseTsv(payload.res)
+    } else if (format.indexOf('json') > -1) {
+      state._data = parseJSON(payload.res)
     } else {
       state._data = parseTsv(payload.res)
     }
 
     state.data = state._data.slice(0, state.page * state.perPage)
+    console.log(state.data)
     state.dataset = payload.name.split('/')[0].toUpperCase()
     state.page += 1
   },

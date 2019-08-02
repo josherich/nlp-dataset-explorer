@@ -28,7 +28,7 @@ export default {
   name: 'header-bar',
   data () {
     return {
-      datasets: ['WNLI', 'QNLI', 'QQP', 'RTE', 'SST-2', 'STS-B', 'DIAGNOSTICS', 'DPR'],
+      datasets: ['WNLI', 'QNLI', 'QQP', 'RTE', 'SST-2', 'STS-B', 'DIAGNOSTICS', 'DPR', 'CMRC', 'DRCD'],
       showOptions: false
     }
   },
