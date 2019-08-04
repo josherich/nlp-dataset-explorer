@@ -24,6 +24,27 @@
         <template v-else-if="$route.query.dataset == 'DRCD'">
           <a href="https://github.com/DRCKnowledgeTeam/DRCD">About This Task</a>
         </template>
+        <template v-else-if="$route.query.dataset == 'COPA'">
+          <a href="http://people.ict.usc.edu/~gordon/copa.html">About This Task</a>
+        </template>
+        <template v-else-if="$route.query.dataset == 'MultiRC'">
+          <a href="https://cogcomp.seas.upenn.edu/multirc/">About This Task</a>
+        </template>
+        <template v-else-if="$route.query.dataset == 'WiC'">
+          <a href="https://pilehvar.github.io/wic/">About This Task</a>
+        </template>
+        <template v-else-if="$route.query.dataset == 'WNLI'">
+          <a href="https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html">About This Task</a>
+        </template>
+        <template v-else-if="$route.query.dataset == 'ReCoRD'">
+          <a href="https://sheng-z.github.io/ReCoRD-explorer/">About This Task</a>
+        </template>
+        <template v-else-if="$route.query.dataset == 'BoolQ'">
+          <a href="https://github.com/google-research-datasets/boolean-questions">About This Task</a>
+        </template>
+        <template v-else-if="$route.query.dataset == 'RACE'">
+          <a href="http://www.qizhexie.com/data/RACE_leaderboard">About This Task</a>
+        </template>
         <template v-else>
           <a href="https://gluebenchmark.com/tasks">About This Task</a>
         </template>

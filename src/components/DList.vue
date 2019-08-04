@@ -113,7 +113,7 @@
       </div>
     </template>
 
-    <template v-if="ds_name === 'DPR'" v-for="(item, index) in items">
+    <template v-if="ds_name === 'DPR'" v-for="(item, index) in [{}].concat(items)">
       <div v-if="index === 0" class="row row-head">
           <span class="col-index">index</span>
           <span class="col-label">label</span>
@@ -125,6 +125,71 @@
           <span class="col-label">{{item[4]}}</span>
           <span class="col-sent">{{item[2]}}</span>
           <span class="col-sent">{{item[3]}}</span>
+      </div>
+    </template>
+
+    <template v-if="ds_name === 'CB' || ds_name === 'RTE-DIAGNOSTIC'" v-for="(item, index) in [{}].concat(items)">
+      <div v-if="index === 0" class="row row-head">
+          <span class="col-index">index</span>
+          <span class="col-label">label</span>
+          <span class="col-sent">premise</span>
+          <span class="col-sent">Hypothesis</span>
+      </div>
+      <div v-else class="row">
+          <span class="col-index">{{item['idx']}}</span>
+          <span class="col-label">{{item['label']}}</span>
+          <span class="col-sent">{{item['premise']}}</span>
+          <span class="col-sent">{{item['hypothesis']}}</span>
+      </div>
+    </template>
+
+    <template v-if="ds_name === 'COPA'" v-for="(item, index) in [{}].concat(items)">
+      <div v-if="index === 0" class="row row-head">
+          <span class="col-index">index</span>
+          <span class="col-label">label</span>
+          <span class="col-sent">premise</span>
+          <span class="col-sent">Choice 1</span>
+          <span class="col-sent">Choice 2</span>
+      </div>
+      <div v-else class="row">
+          <span class="col-index">{{item['idx']}}</span>
+          <span class="col-label">{{item['label']}}</span>
+          <span class="col-sent">{{item['premise']}}</span>
+          <span class="col-sent">{{item['choice1']}}</span>
+          <span class="col-sent">{{item['choice2']}}</span>
+      </div>
+    </template>
+
+
+    <template v-if="ds_name === 'WIC'" v-for="(item, index) in [{}].concat(items)">
+      <div v-if="index === 0" class="row row-head">
+          <span class="col-index">index</span>
+          <span class="col-label">word</span>
+          <span class="col-label">label</span>
+          <span class="col-sent">Sentence 1</span>
+          <span class="col-sent">Sentence 2</span>
+      </div>
+      <div v-else class="row">
+          <span class="col-index">{{item['idx']}}</span>
+          <span class="col-label">{{item['word']}}</span>
+          <span class="col-label">{{item['label']}}</span>
+          <span class="col-sent">{{item['sentence1'].replace(item['word'], `[${item['word']}]`)}}</span>
+          <span class="col-sent">{{item['sentence2'].replace(item['word'], `[${item['word']}]`)}}</span>
+      </div>
+    </template>
+
+    <template v-if="ds_name === 'BOOLQ'" v-for="(item, index) in [{}].concat(items)">
+      <div v-if="index === 0" class="row row-head">
+          <span class="col-index">index</span>
+          <span class="col-label">label</span>
+          <span class="col-sent">passage</span>
+          <span class="col-sent">question</span>
+      </div>
+      <div v-else class="row">
+          <span class="col-index">{{item['idx']}}</span>
+          <span class="col-label">{{item['label']}}</span>
+          <span class="col-sent">{{item['passage']}}</span>
+          <span class="col-sent">{{item['question']}}</span>
       </div>
     </template>
 
@@ -156,6 +221,73 @@
           </div>
 
         </template>
+      </div>
+    </template>
+
+    <template v-if="ds_name === 'MULTIRC'" v-for="(item, index) in items">
+      <div class="row-block">
+        <div class="paragraph">
+
+          <div class=""><p>{{item['passage']['text']}}</p></div>
+
+          <template v-for="(row, ri) in item['passage']['questions']">
+            <div class="question">
+              <p>{{row['question']}}</p>
+
+              <div class="answers">
+                <span class="answer" v-for="(a, ai) in row['answers']">
+                  <div>{{a['text']}}</div><div class="annotate-id">{{a['label']}}</div>
+                </span>
+              </div>
+            </div>
+          </template>
+
+        </div>
+      </div>
+    </template>
+
+    <template v-if="ds_name === 'RECORD'" v-for="(item, index) in items">
+      <div class="row-block">
+        <div class="paragraph">
+          <div class="">{{item['source']}}</div>
+          <div class=""><p>{{item['passage']['text']}}</p></div>
+
+          <template v-for="(row, ri) in item['qas']">
+            <div class="question">
+              <p>{{row['query']}}</p>
+
+              <div class="answers">
+                <span class="answer" v-for="(a, ai) in row['answers']">
+                  <div>{{a['text']}}</div><div class="annotate-id">{{a['label']}}</div>
+                </span>
+              </div>
+            </div>
+          </template>
+
+        </div>
+      </div>
+    </template>
+
+    <template v-if="ds_name === 'RACE'" v-for="(item, index) in items">
+      <div class="row-block">
+        <div class="paragraph">
+
+          <div class=""><p>{{item['article']}}</p></div>
+
+          <template v-for="(q, qi) in item['questions']">
+            <div class="question">
+              <p>{{q}}</p>
+
+              <div class="options">
+                <span class="option" v-for="(opt, opti) in item['options'][qi]">
+                  <div>{{['A)', 'B)', 'C)', 'D)'][opti]}} {{opt}}</div>
+                </span>
+              </div>
+              <div class="answer">{{item['answers'][qi]}}</div>
+            </div>
+          </template>
+
+        </div>
       </div>
     </template>
 
@@ -227,6 +359,7 @@ p {
     margin-left: 2rem;
     color: #aaa;
     .annotate-id {
+      margin-left: 1rem;
       font-size: 80%;
     }
     > span {
@@ -235,6 +368,14 @@ p {
     div {
       display: inline-block;
     }
+  }
+  .answer {
+    display: inline-block;
+    padding: 0.6rem 0;
+    border-bottom: 2px solid #8e81ff8c;
+  }
+  .question {
+    margin-left: 2rem;
   }
   .row {
     margin: 2em 0;

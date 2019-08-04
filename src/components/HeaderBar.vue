@@ -28,14 +28,14 @@ export default {
   name: 'header-bar',
   data () {
     return {
-      datasets: ['WNLI', 'QNLI', 'QQP', 'RTE', 'SST-2', 'STS-B', 'DIAGNOSTICS', 'DPR', 'CMRC', 'DRCD'],
       showOptions: false
     }
   },
   computed: {
     // Getting Vuex State from store/modules/activities
     ...mapState({
-      dataset: state => state.docs.dataset
+      dataset: state => state.docs.dataset,
+      datasets: state => state.docs.datasets
     })
   },
   methods: {
