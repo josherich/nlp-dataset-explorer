@@ -4,3 +4,6 @@ dist/
 npm-debug.log
 .env
 tmp
+static/data/ReCoRD/train.jsonl
+static/data/RACE/train-high.jsonl
+static/data/RACE/train-middle.jsonl
