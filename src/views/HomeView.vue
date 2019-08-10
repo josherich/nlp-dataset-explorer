@@ -45,6 +45,14 @@
         <template v-else-if="$route.query.dataset == 'RACE'">
           <a href="http://www.qizhexie.com/data/RACE_leaderboard">About This Task</a>
         </template>
+        <template v-else-if="$route.query.dataset == 'SciTail'">
+          <a href="https://leaderboard.allenai.org/scitail/submissions/get-started">About This Task</a>
+        </template>
+        <template v-else-if="$route.query.dataset == 'Winogrande'">
+          <p>A new collection of Winograd Schema Challenge (WSC) problems that are adversarially constructed to be robust against spurious statistical biases. It includes 43,985 instances, half of which are determined as adversarial. A new adversarial filtering algorithm AfLite for systematic bias reduction, combined with a careful crowdsourcing design. The performance of existing state-of-the-art methods remains modest (61.6%) and contrasts with high human performance (90.8%) for the binary questions.</p>
+          <a href="https://leaderboard.allenai.org/winogrande/submissions/get-started">About This Task</a>
+        </template>
+
         <template v-else>
           <a href="https://gluebenchmark.com/tasks">About This Task</a>
         </template>
@@ -126,10 +134,17 @@ export default {
     }
   }
 }
+
 .about {
   text-align: right;
   font-size: 120%;
   margin: 2rem 0 0 0;
+  p {
+    text-align: left;
+    font-size: 120%;
+    line-height: 1.8rem;
+    color: #aaa;
+  }
 }
 .d-list {
   margin-top: 2rem;

@@ -8,7 +8,10 @@ const state = {
   _data: [],
   data: [],
   dataset: '',
-  datasets: ['WNLI', 'QNLI', 'QQP', 'RTE', 'SST-2', 'STS-B', 'DIAGNOSTICS', 'DPR', 'CMRC', 'DRCD', 'CB', 'COPA', 'MultiRC', 'RTE-diagnostic', 'WiC', 'BoolQ', 'ReCoRD', 'RACE']
+  datasets: ['WNLI', 'QNLI', 'QQP', 'RTE', 'SST-2', 'STS-B', 'DIAGNOSTICS', 'DPR',
+    'CMRC', 'DRCD',
+    'CB', 'COPA', 'MultiRC', 'RTE-diagnostic', 'WiC', 'BoolQ', 'ReCoRD',
+    'RACE', 'SciTail', 'Winogrande']
 }
 
 const datasetUri = {
@@ -30,7 +33,9 @@ const datasetUri = {
   'WSC': 'WSC/val.jsonl',
   'BoolQ': 'BoolQ/val.jsonl',
   'ReCoRD': 'ReCoRD/val.jsonl',
-  'RACE': 'RACE/dev-middle.jsonl'
+  'RACE': 'RACE/dev-middle.jsonl',
+  'SciTail': 'SciTail/scitail_1.0_dev.tsv',
+  'Winogrande': 'winogrande/dev.jsonl'
 }
 
 const parseTsv = (content) => {

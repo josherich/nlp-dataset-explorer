@@ -291,6 +291,34 @@
       </div>
     </template>
 
+    <template v-if="ds_name === 'SCITAIL'" v-for="(item, index) in [{}].concat(items)">
+      <div v-if="index === 0" class="row row-head">
+          <span class="col-index">index</span>
+          <span class="col-label">label</span>
+          <span class="col-sent">Sentence 1</span>
+          <span class="col-sent">Sentence 2</span>
+      </div>
+      <div v-else class="row">
+          <span class="col-index">{{index}}</span>
+          <span class="col-label">{{item[2]}}</span>
+          <span class="col-sent">{{item[0]}}</span>
+          <span class="col-sent">{{item[1]}}</span>
+      </div>
+    </template>
+
+    <template v-if="ds_name === 'WINOGRANDE'" v-for="(item, index) in [{}].concat(items)">
+      <div v-if="index === 0" class="row row-head">
+          <span class="col-index">index</span>
+          <span class="col-label">label</span>
+          <span class="col-sent">Sentence</span>
+      </div>
+      <div v-else class="row">
+          <span class="col-index">{{index}}</span>
+          <span class="col-label">{{`${item['option1']}${item['answer']==='1'?'(x)':''}, ${item['option2']}${item['answer']==='2'?'(x)':''}`}}</span>
+          <span class="col-sent">{{item['sentence']}}</span>
+      </div>
+    </template>
+
     <template v-if="ds_name === 'basic'">
       <ul class="basic">
         <li v-for="item in items">
