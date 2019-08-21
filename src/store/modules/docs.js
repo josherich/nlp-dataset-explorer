@@ -11,7 +11,7 @@ const state = {
   datasets: ['WNLI', 'QNLI', 'QQP', 'RTE', 'SST-2', 'STS-B', 'DIAGNOSTICS', 'DPR',
     'CMRC', 'DRCD',
     'CB', 'COPA', 'MultiRC', 'RTE-diagnostic', 'WiC', 'BoolQ', 'ReCoRD',
-    'RACE', 'SciTail', 'Winogrande']
+    'RACE', 'SciTail', 'Winogrande', 'swag']
 }
 
 const datasetUri = {
@@ -35,11 +35,16 @@ const datasetUri = {
   'ReCoRD': 'ReCoRD/val.jsonl',
   'RACE': 'RACE/dev-middle.jsonl',
   'SciTail': 'SciTail/scitail_1.0_dev.tsv',
-  'Winogrande': 'winogrande/dev.jsonl'
+  'Winogrande': 'winogrande/dev.jsonl',
+  'swag': 'swag/val_full.csv'
 }
 
-const parseTsv = (content) => {
+const parseTSV = (content) => {
   return content.split('\n').map(row => row.split('\t'))
+}
+
+const parseCSV = (content) => {
+  return content.split('\n').map(row => row.split(','))
 }
 
 const parseJSON = (content) => {
@@ -66,13 +71,15 @@ const mutations = {
     if (payload.name.indexOf('DPR') > -1) {
       state._data = parseDPR(payload.res)
     } else if (format.indexOf('tsv') > -1) {
-      state._data = parseTsv(payload.res)
+      state._data = parseTSV(payload.res)
+    } else if (format.indexOf('csv') > -1) {
+      state._data = parseCSV(payload.res)
     } else if (format.indexOf('jsonl') > -1) {
       state._data = parseJSONL(payload.res)
     } else if (format.indexOf('json') > -1) {
       state._data = parseJSON(payload.res)
     } else {
-      state._data = parseTsv(payload.res)
+      state._data = parseTSV(payload.res)
     }
 
     state.data = state._data.slice(0, state.page * state.perPage)

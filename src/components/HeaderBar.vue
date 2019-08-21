@@ -86,6 +86,8 @@ export default {
     background: white;
     padding: 5px 14px;
     border: 1px solid #eee;
+    height: 60rem;
+    overflow: auto;
     li {
       display: block;
       padding: 1rem 0;

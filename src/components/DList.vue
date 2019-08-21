@@ -319,6 +319,26 @@
       </div>
     </template>
 
+    <template v-if="ds_name === 'SWAG'" v-for="(item, index) in items.slice(1)">
+      <div class="row-block">
+
+        <div class="question">
+          <p>{{item[2]}}...</p>
+
+          <div class="options">
+            <div class="option gold">{{item[3]}}</div>
+            <div class="option">{{item[4]}}</div>
+            <div class="option">{{item[5]}}</div>
+            <div class="option">{{item[6]}}</div>
+            <div class="option">{{item[7]}}</div>
+          </div>
+
+        </div>
+
+      </div>
+    </template>
+
+
     <template v-if="ds_name === 'basic'">
       <ul class="basic">
         <li v-for="item in items">
@@ -442,6 +462,12 @@ p {
   .download {
     margin-right: 1.8rem;
     text-align: right;
+  }
+  .option {
+    padding: 4px 0 4px 8px;
+  }
+  .option.gold {
+    background: RGBA(2, 184, 117, 0.50);
   }
   .thumbnail {
     position: relative;
