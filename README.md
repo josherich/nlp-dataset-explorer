@@ -32,3 +32,15 @@
 
 `npm run dev`
 
+
+https://huggingface.co/pytorch-transformers/pretrained_models.html
+
+## todos
+
+QuQA
+CoQA
+Document QA
+Narrative QA
+HotpotQA
+Trivia QA
+DuReader

@@ -36,7 +36,9 @@ const datasetUri = {
   'RACE': 'RACE/dev-middle.jsonl',
   'SciTail': 'SciTail/scitail_1.0_dev.tsv',
   'Winogrande': 'winogrande/dev.jsonl',
-  'swag': 'swag/val_full.csv'
+  'swag': 'swag/val_full.csv',
+  // https://arxiv.org/pdf/1903.00161.pdf
+  // https://allennlp.org/drop
 }
 
 const parseTSV = (content) => {
