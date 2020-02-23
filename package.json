@@ -15,6 +15,7 @@
     "dotenv": "^8.0.0",
     "module-alias": "^2.2.0",
     "normalize.css": "^5.0.0",
+    "semantic-ui": "^2.4.2",
     "superagent": "^3.5.2",
     "superagent-jsonp": "^0.1.1",
     "vue": "^2.1.10",

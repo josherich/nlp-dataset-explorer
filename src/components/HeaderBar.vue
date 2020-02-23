@@ -74,6 +74,7 @@ export default {
 
     a {
       display: block;
+      font-size: 0.8em;
     }
   }
   .nav-options {

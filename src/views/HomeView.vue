@@ -3,14 +3,24 @@
     <!-- <sub-nav mold="quickNav"></sub-nav> -->
     <!-- <search-filter></search-filter> -->
     <div class="search">
-      <form id="search_form" onsubmit="return false">
+<!--       <form id="search_form" onsubmit="return false">
         <input
           type="text"
           name="query"
           v-model.trim.lazy="queryStr"
           placeholder="Search sentences (more than 3 chars)">
         <a href="javascript:void(0);" @click="query()">Search</a>
-      </form>
+      </form> -->
+
+      <div class="ui category search">
+        <div class="ui icon input">
+          <input class="prompt" type="text" name="query" v-model.trim.lazy="queryStr" placeholder="Search sentences... (at least 3 chars)">
+          <i class="search icon"></i>
+        </div>
+        <a href="javascript:void(0);" @click="query()">Search</a>
+        <div class="results"></div>
+      </div>
+
     </div>
 
     <template>
@@ -154,9 +164,12 @@ export default {
 }
 .search {
   padding: 0.7rem 2rem;
-  border-bottom: 0.1rem solid #F2F2F2;
+  // border-bottom: 0.1rem solid #F2F2F2;
   overflow: hidden;
 
+  .icon.input {
+    width: 100%;
+  }
   input {
     width: 85%;
     height: 3rem;

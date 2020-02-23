@@ -1,219 +1,337 @@
 <template>
   <div class="d-list">
 
-    <template v-if="ds_name === 'WNLI'" v-for="(item, index) in items">
-      <div v-if="index === 0" class="row row-head">
-          <span class="col-index">{{item[0]}}</span>
-          <span class="col-label">{{item[3]}}</span>
-          <span class="col-sent">{{item[1]}}</span>
-          <span class="col-sent">{{item[2]}}</span>
-      </div>
-      <div v-else class="row">
-          <span class="col-index">{{item[0]}}</span>
-          <span class="col-label">{{item[3]}}</span>
-          <span class="col-sent">{{item[1]}}</span>
-          <span class="col-sent">{{item[2]}}</span>
-      </div>
+    <template v-if="ds_name === 'WNLI'">
+      <table class="ui celled table">
+        <thead>
+          <tr>
+            <th class="col-index">{{items[0][0]}}</th>
+            <th class="col-label">{{items[0][3]}}</th>
+            <th class="col-sent">{{items[0][1]}}</th>
+            <th class="col-sent">{{items[0][2]}}</th>
+        </tr></thead>
+
+        <tbody>
+
+          <template v-for="(item, index) in items.slice(1)">
+          <tr>
+              <td class="col-index">{{item[0]}}</td>
+              <td class="col-label">{{item[3]}}</td>
+              <td class="col-sent">{{item[1]}}</td>
+              <td class="col-sent">{{item[2]}}</td>
+          </tr>
+          </template>
+
+        </tbody>
+      </table>
     </template>
 
-    <template v-if="ds_name === 'DIAGNOSTICS'" v-for="(item, index) in items">
-      <div v-if="index === 0" class="row row-head">
-          <!-- Lexical Semantics__Predicate-Argument Structure__Logic__Knowledge__Domain__Premise__Hypothesis__Label -->
-          <span class="col-index">{{index}}</span>
-          <span class="col-index">{{item[1]}}</span>
-          <span class="col-label">{{item[7]}}</span>
-          <span class="col-sent">{{item[5]}}</span>
-          <span class="col-sent">{{item[6]}}</span>
-      </div>
-      <div v-else class="row">
-          <!-- Lexical Semantics__Predicate-Argument Structure__Logic__Knowledge__Domain__Premise__Hypothesis__Label -->
-          <span class="col-index">{{index}}</span>
-          <span class="col-index">{{item[1]}}</span>
-          <span class="col-label">{{item[7]}}</span>
-          <span class="col-sent">{{item[5]}}</span>
-          <span class="col-sent">{{item[6]}}</span>
-      </div>
+    <template v-if="ds_name === 'DIAGNOSTICS'">
+      <table class="ui celled table">
+        <thead>
+          <tr>
+            <th class="col-index">Index</th>
+            <th class="col-index">{{items[0][1]}}</th>
+            <th class="col-label">{{items[0][7]}}</th>
+            <th class="col-sent">{{items[0][5]}}</th>
+            <th class="col-sent">{{items[0][6]}}</th>
+        </tr></thead>
+
+        <tbody>
+
+          <template v-for="(item, index) in items.slice(1)">
+          <tr>
+            <td class="col-index">{{index}}</td>
+            <td class="col-index">{{item[1]}}</td>
+            <td class="col-label">{{item[7]}}</td>
+            <td class="col-sent">{{item[5]}}</td>
+            <td class="col-sent">{{item[6]}}</td>
+          </tr>
+          </template>
+
+        </tbody>
+      </table>
     </template>
 
-    <template v-if="ds_name === 'QNLI'" v-for="(item, index) in items">
-      <div v-if="index === 0" class="row row-head">
-          <!-- Lexical Semantics__Predicate-Argument Structure__Logic__Knowledge__Domain__Premise__Hypothesis__Label -->
-          <span class="col-index">{{item[0]}}</span>
-          <span class="col-label">{{item[3]}}</span>
-          <span class="col-sent">{{item[1]}}</span>
-          <span class="col-sent">{{item[2]}}</span>
-      </div>
-      <div v-else class="row">
-          <!-- Lexical Semantics__Predicate-Argument Structure__Logic__Knowledge__Domain__Premise__Hypothesis__Label -->
-          <span class="col-index">{{item[0]}}</span>
-          <span class="col-label">{{item[3]}}</span>
-          <span class="col-sent">{{item[1]}}</span>
-          <span class="col-sent">{{item[2]}}</span>
-      </div>
-    </template>
+    <template v-if="ds_name === 'QNLI'">
+      <table class="ui celled table">
+        <thead>
+          <tr>
+            <th class="col-index">{{items[0][0]}}</th>
+            <th class="col-label">{{items[0][3]}}</th>
+            <th class="col-sent">{{items[0][1]}}</th>
+            <th class="col-sent">{{items[0][2]}}</th>
+        </tr></thead>
 
-    <template v-if="ds_name === 'QQP'" v-for="(item, index) in items">
-      <!-- id__qid1__qid2__question1__question2__is_duplicate -->
-      <div v-if="index === 0" class="row row-head">
-          <span class="col-index">{{item[0]}}</span>
-          <span class="col-label">{{item[5]}}</span>
-          <span class="col-sent">{{item[3]}}</span>
-          <span class="col-sent">{{item[4]}}</span>
-      </div>
-      <div v-else class="row">
-          <span class="col-index">{{item[0]}}</span>
-          <span class="col-label">{{item[5]}}</span>
-          <span class="col-sent">{{item[3]}}</span>
-          <span class="col-sent">{{item[4]}}</span>
-      </div>
-    </template>
+        <tbody>
 
-    <template v-if="ds_name === 'RTE'" v-for="(item, index) in items">
-      <!-- index__sentence1__sentence2__label -->
-      <div v-if="index === 0" class="row row-head">
-          <span class="col-index">{{item[0]}}</span>
-          <span class="col-label">{{item[3]}}</span>
-          <span class="col-sent">{{item[1]}}</span>
-          <span class="col-sent">{{item[2]}}</span>
-      </div>
-      <div v-else class="row">
-          <span class="col-index">{{item[0]}}</span>
-          <span class="col-label">{{item[3]}}</span>
-          <span class="col-sent">{{item[1]}}</span>
-          <span class="col-sent">{{item[2]}}</span>
-      </div>
-    </template>
+          <template v-for="(item, index) in items.slice(1)">
+          <tr>
+              <td class="col-index">{{item[0]}}</td>
+              <td class="col-label">{{item[3]}}</td>
+              <td class="col-sent">{{item[1]}}</td>
+              <td class="col-sent">{{item[2]}}</td>
+          </tr>
+          </template>
 
-    <template v-if="ds_name === 'SST-2'" v-for="(item, index) in items">
-      <div v-if="index === 0" class="row row-head">
-          <span class="col-index">{{index}}</span>
-          <span class="col-index">{{item[1]}}</span>
-          <span class="col-sent">{{item[0]}}</span>
-      </div>
-      <div v-else class="row">
-          <span class="col-index">{{index}}</span>
-          <span class="col-index">{{item[1]}}</span>
-          <span class="col-sent">{{item[0]}}</span>
-      </div>
-    </template>
-
-    <template v-if="ds_name === 'STS-B'" v-for="(item, index) in items">
-      <!-- index__genre__filename__year__old_index__source1__source2__sentence1__sentence2__score -->
-      <div v-if="index === 0" class="row row-head">
-          <span class="col-index">{{item[0]}}</span>
-          <span class="col-label">{{item[9]}}</span>
-          <span class="col-sent">{{item[7]}}</span>
-          <span class="col-sent">{{item[8]}}</span>
-      </div>
-      <div v-else class="row">
-          <span class="col-index">{{item[0]}}</span>
-          <span class="col-label">{{item[9]}}</span>
-          <span class="col-sent">{{item[7]}}</span>
-          <span class="col-sent">{{item[8]}}</span>
-      </div>
-    </template>
-
-    <template v-if="ds_name === 'DPR'" v-for="(item, index) in [{}].concat(items)">
-      <div v-if="index === 0" class="row row-head">
-          <span class="col-index">index</span>
-          <span class="col-label">label</span>
-          <span class="col-sent">premise</span>
-          <span class="col-sent">Hypothesis</span>
-      </div>
-      <div v-else class="row">
-          <span class="col-index">{{item[1]}}</span>
-          <span class="col-label">{{item[4]}}</span>
-          <span class="col-sent">{{item[2]}}</span>
-          <span class="col-sent">{{item[3]}}</span>
-      </div>
-    </template>
-
-    <template v-if="ds_name === 'CB' || ds_name === 'RTE-DIAGNOSTIC'" v-for="(item, index) in [{}].concat(items)">
-      <div v-if="index === 0" class="row row-head">
-          <span class="col-index">index</span>
-          <span class="col-label">label</span>
-          <span class="col-sent">premise</span>
-          <span class="col-sent">Hypothesis</span>
-      </div>
-      <div v-else class="row">
-          <span class="col-index">{{item['idx']}}</span>
-          <span class="col-label">{{item['label']}}</span>
-          <span class="col-sent">{{item['premise']}}</span>
-          <span class="col-sent">{{item['hypothesis']}}</span>
-      </div>
-    </template>
-
-    <template v-if="ds_name === 'COPA'" v-for="(item, index) in [{}].concat(items)">
-      <div v-if="index === 0" class="row row-head">
-          <span class="col-index">index</span>
-          <span class="col-label">label</span>
-          <span class="col-sent">premise</span>
-          <span class="col-sent">Choice 1</span>
-          <span class="col-sent">Choice 2</span>
-      </div>
-      <div v-else class="row">
-          <span class="col-index">{{item['idx']}}</span>
-          <span class="col-label">{{item['label']}}</span>
-          <span class="col-sent">{{item['premise']}}</span>
-          <span class="col-sent">{{item['choice1']}}</span>
-          <span class="col-sent">{{item['choice2']}}</span>
-      </div>
+        </tbody>
+      </table>
     </template>
 
 
-    <template v-if="ds_name === 'WIC'" v-for="(item, index) in [{}].concat(items)">
-      <div v-if="index === 0" class="row row-head">
-          <span class="col-index">index</span>
-          <span class="col-label">word</span>
-          <span class="col-label">label</span>
-          <span class="col-sent">Sentence 1</span>
-          <span class="col-sent">Sentence 2</span>
-      </div>
-      <div v-else class="row">
-          <span class="col-index">{{item['idx']}}</span>
-          <span class="col-label">{{item['word']}}</span>
-          <span class="col-label">{{item['label']}}</span>
-          <span class="col-sent">{{item['sentence1'].replace(item['word'], `[${item['word']}]`)}}</span>
-          <span class="col-sent">{{item['sentence2'].replace(item['word'], `[${item['word']}]`)}}</span>
-      </div>
+    <template v-if="ds_name === 'QQP'">
+      <table class="ui celled table">
+        <thead>
+          <tr>
+            <th class="col-index">{{items[0][0]}}</th>
+            <th class="col-label">{{items[0][5]}}</th>
+            <th class="col-sent">{{items[0][3]}}</th>
+            <th class="col-sent">{{items[0][4]}}</th>
+        </tr></thead>
+
+        <tbody>
+
+          <template v-for="(item, index) in items.slice(1)">
+          <tr>
+              <td class="col-index">{{item[0]}}</td>
+              <td class="col-label">{{item[5]}}</td>
+              <td class="col-sent">{{item[3]}}</td>
+              <td class="col-sent">{{item[4]}}</td>
+          </tr>
+          </template>
+
+        </tbody>
+      </table>
     </template>
 
-    <template v-if="ds_name === 'BOOLQ'" v-for="(item, index) in [{}].concat(items)">
-      <div v-if="index === 0" class="row row-head">
-          <span class="col-index">index</span>
-          <span class="col-label">label</span>
-          <span class="col-sent">passage</span>
-          <span class="col-sent">question</span>
-      </div>
-      <div v-else class="row">
-          <span class="col-index">{{item['idx']}}</span>
-          <span class="col-label">{{item['label']}}</span>
-          <span class="col-sent">{{item['passage']}}</span>
-          <span class="col-sent">{{item['question']}}</span>
-      </div>
+    <template v-if="ds_name === 'RTE'">
+      <table class="ui celled table">
+        <thead>
+          <tr>
+            <th class="col-index">{{items[0][0]}}</th>
+            <th class="col-label">{{items[0][3]}}</th>
+            <th class="col-sent">{{items[0][1]}}</th>
+            <th class="col-sent">{{items[0][2]}}</th>
+        </tr></thead>
+
+        <tbody>
+
+          <template v-for="(item, index) in items.slice(1)">
+          <tr>
+              <td class="col-index">{{item[0]}}</td>
+              <td class="col-label">{{item[3]}}</td>
+              <td class="col-sent">{{item[1]}}</td>
+              <td class="col-sent">{{item[2]}}</td>
+          </tr>
+          </template>
+
+        </tbody>
+      </table>
+    </template>
+
+    <template v-if="ds_name === 'SST-2'">
+      <table class="ui celled table">
+        <thead>
+          <tr>
+            <th class="col-index">Index</th>
+            <th class="col-label">{{items[0][1]}}</th>
+            <th class="col-sent">{{items[0][0]}}</th>
+        </tr></thead>
+
+        <tbody>
+
+          <template v-for="(item, index) in items.slice(1)">
+          <tr>
+              <td class="col-label">{{index}}</td>
+              <td class="col-sent">{{item[1]}}</td>
+              <td class="col-sent">{{item[0]}}</td>
+          </tr>
+          </template>
+
+        </tbody>
+      </table>
+    </template>
+
+    <template v-if="ds_name === 'STS-B'">
+      <table class="ui celled table">
+        <thead>
+          <tr>
+            <th class="col-index">{{items[0][0]}}</th>
+            <th class="col-label">{{items[0][9]}}</th>
+            <th class="col-sent">{{items[0][7]}}</th>
+            <th class="col-sent">{{items[0][8]}}</th>
+        </tr></thead>
+
+        <tbody>
+
+          <template v-for="(item, index) in items.slice(1)">
+          <tr>
+              <td class="col-index">{{item[0]}}</td>
+              <td class="col-label">{{item[9]}}</td>
+              <td class="col-sent">{{item[7]}}</td>
+              <td class="col-sent">{{item[8]}}</td>
+          </tr>
+          </template>
+
+        </tbody>
+      </table>
+    </template>
+
+
+    <template v-if="ds_name === 'DPR'">
+      <table class="ui celled table">
+        <thead>
+          <tr>
+            <th class="col-index">Index</th>
+            <th class="col-label">Label</th>
+            <th class="col-sent">Premise</th>
+            <th class="col-sent">Hypothesis</th>
+        </tr></thead>
+
+        <tbody>
+
+          <template v-for="(item, index) in items">
+          <tr>
+              <td class="col-index">{{item[1]}}</td>
+              <td class="col-label">{{item[4]}}</td>
+              <td class="col-sent">{{item[2]}}</td>
+              <td class="col-sent">{{item[3]}}</td>
+          </tr>
+          </template>
+
+        </tbody>
+      </table>
+    </template>
+
+
+    <template v-if="ds_name === 'CB' || ds_name === 'RTE-DIAGNOSTIC'">
+      <table class="ui celled table">
+        <thead>
+          <tr>
+            <th class="col-index">Index</th>
+            <th class="col-label">Label</th>
+            <th class="col-sent">Premise</th>
+            <th class="col-sent">Hypothesis</th>
+        </tr></thead>
+
+        <tbody>
+
+          <template v-for="(item, index) in items">
+          <tr>
+              <td class="col-index">{{item['idx']}}</td>
+              <td class="col-label">{{item['label']}}</td>
+              <td class="col-sent">{{item['premise']}}</td>
+              <td class="col-sent">{{item['hypothesis']}}</td>
+          </tr>
+          </template>
+
+        </tbody>
+      </table>
+    </template>
+
+    <template v-if="ds_name === 'COPA'">
+      <table class="ui celled table">
+        <thead>
+          <tr>
+            <th class="col-index">Index</th>
+            <th class="col-label">Label</th>
+            <th class="col-sent">Premise</th>
+            <th class="col-sent">Choice 1</th>
+            <th class="col-sent">Choice 2</th>
+        </tr></thead>
+
+        <tbody>
+
+          <template v-for="(item, index) in items">
+          <tr>
+            <td class="col-index">{{item['idx']}}</td>
+            <td class="col-label">{{item['label']}}</td>
+            <td class="col-sent">{{item['premise']}}</td>
+            <td class="col-sent">{{item['choice1']}}</td>
+            <td class="col-sent">{{item['choice2']}}</td>
+          </tr>
+          </template>
+
+        </tbody>
+      </table>
+    </template>
+
+
+    <template v-if="ds_name === 'WIC'">
+      <table class="ui celled table">
+        <thead>
+          <tr>
+            <th class="col-index">Index</th>
+            <th class="col-label">Word</th>
+            <th class="col-sent">Label</th>
+            <th class="col-sent">Sentence 1</th>
+            <th class="col-sent">Sentence 2</th>
+        </tr></thead>
+
+        <tbody>
+
+          <template v-for="(item, index) in items">
+          <tr>
+            <td class="col-index">{{item['idx']}}</td>
+            <td class="col-label">{{item['word']}}</td>
+            <td class="col-sent">{{item['label']}}</td>
+            <td class="col-sent">{{item['sentence1'].replace(item['word'], `[${item['word']}]`)}}</td>
+            <td class="col-sent">{{item['sentence2'].replace(item['word'], `[${item['word']}]`)}}</td>
+          </tr>
+          </template>
+
+        </tbody>
+      </table>
+    </template>
+
+    <template v-if="ds_name === 'BOOLQ'">
+      <table class="ui celled table">
+        <thead>
+          <tr>
+            <th class="col-index">Index</th>
+            <th class="col-label">Label</th>
+            <th class="col-sent">Passage</th>
+            <th class="col-sent">Question</th>
+        </tr></thead>
+
+        <tbody>
+
+          <template v-for="(item, index) in items">
+          <tr>
+              <td class="col-index">{{item['idx']}}</td>
+              <td class="col-label">{{item['label']}}</td>
+              <td class="col-sent">{{item['passage']}}</td>
+              <td class="col-sent">{{item['question']}}</td>
+          </tr>
+          </template>
+
+        </tbody>
+      </table>
     </template>
 
     <template v-if="ds_name === 'CMRC' || ds_name === 'DRCD'" v-for="(item, index) in items">
       <div class="row-block">
 
-        <div class="title">{{item['title']}}</div>
+        <h2 class="ui horizontal divider header">
+          <i class="file outline icon"></i>
+          {{item['title']}}
+        </h2>
 
         <template v-for="(row, ri) in item['paragraphs']">
           <div class="paragraph">
             <p>{{row['context']}}</p>
 
+            <h4 class="ui horizontal divider header">
+              <i class="question circle outline icon"></i>
+              Questions
+            </h4>
+
             <div v-for="(q, qi) in row['qas']">
-              <p>{{q['question']}}</p>
+              <p class="question">{{q['question']}}</p>
 
               <div class="answers">
-                <span v-for="(a, ai) in q['answers']">
-                  <div>{{a['text']}}</div><div class="annotate-id">{{a['id']}}</div>
-                </span>
-              </div>
-
-              <div class="answers">
-                <span v-for="(a, ai) in q['answers']">
-                  <div>{{a['answer_start']}}</div>
+                <span class="answer" v-for="(a, ai) in q['answers']">
+                  {{ai+1}}: {{a['text']}}<span>({{a['answer_start']}})</span>&nbsp;&nbsp;&nbsp;&nbsp;
                 </span>
               </div>
 
@@ -230,14 +348,24 @@
 
           <div class=""><p>{{item['passage']['text']}}</p></div>
 
+          <h4 class="ui horizontal divider header">
+            <i class="question circle outline icon"></i>
+            Questions
+          </h4>
+
           <template v-for="(row, ri) in item['passage']['questions']">
             <div class="question">
               <p>{{row['question']}}</p>
 
               <div class="answers">
-                <span class="answer" v-for="(a, ai) in row['answers']">
-                  <div>{{a['text']}}</div><div class="annotate-id">{{a['label']}}</div>
-                </span>
+
+                <div class="statement" v-for="(a, ai) in row['answers']">
+
+                  <input type="checkbox" class="annotate-id" v-model="a.label"/>
+                  <label>{{a['text']}}</label>
+
+                </div>
+
               </div>
             </div>
           </template>
@@ -249,8 +377,18 @@
     <template v-if="ds_name === 'RECORD'" v-for="(item, index) in items">
       <div class="row-block">
         <div class="paragraph">
-          <div class="">{{item['source']}}</div>
+
+          <h2 class="ui horizontal divider header">
+            <i class="file outline icon"></i>
+            {{item['source']}}
+          </h2>
+
           <div class=""><p>{{item['passage']['text']}}</p></div>
+
+          <h4 class="ui horizontal divider header">
+            <i class="question circle outline icon"></i>
+            Questions
+          </h4>
 
           <template v-for="(row, ri) in item['qas']">
             <div class="question">
@@ -274,16 +412,21 @@
 
           <div class=""><p>{{item['article']}}</p></div>
 
+          <h4 class="ui horizontal divider header">
+            <i class="question circle outline icon"></i>
+            Questions
+          </h4>
+
           <template v-for="(q, qi) in item['questions']">
-            <div class="question">
-              <p>{{q}}</p>
+            <div class="questions">
+              <div class="">{{q}} <span class="answer">{{item['answers'][qi]}}</span></div>
 
               <div class="options">
                 <span class="option" v-for="(opt, opti) in item['options'][qi]">
                   <div>{{['A)', 'B)', 'C)', 'D)'][opti]}} {{opt}}</div>
                 </span>
               </div>
-              <div class="answer">{{item['answers'][qi]}}</div>
+
             </div>
           </template>
 
@@ -291,32 +434,52 @@
       </div>
     </template>
 
-    <template v-if="ds_name === 'SCITAIL'" v-for="(item, index) in [{}].concat(items)">
-      <div v-if="index === 0" class="row row-head">
-          <span class="col-index">index</span>
-          <span class="col-label">label</span>
-          <span class="col-sent">Sentence 1</span>
-          <span class="col-sent">Sentence 2</span>
-      </div>
-      <div v-else class="row">
-          <span class="col-index">{{index}}</span>
-          <span class="col-label">{{item[2]}}</span>
-          <span class="col-sent">{{item[0]}}</span>
-          <span class="col-sent">{{item[1]}}</span>
-      </div>
+    <template v-if="ds_name === 'SCITAIL'">
+      <table class="ui celled table">
+        <thead>
+          <tr>
+            <th class="col-index">Index</th>
+            <th class="col-label">Label</th>
+            <th class="col-sent">Sentence 1</th>
+            <th class="col-sent">Sentence 2</th>
+        </tr></thead>
+
+        <tbody>
+
+          <template v-for="(item, index) in items.slice(1)">
+          <tr>
+              <td class="col-index">{{index}}</td>
+              <td class="col-label">{{item[2]}}</td>
+              <td class="col-sent">{{item[0]}}</td>
+              <td class="col-sent">{{item[1]}}</td>
+          </tr>
+          </template>
+
+        </tbody>
+      </table>
     </template>
 
-    <template v-if="ds_name === 'WINOGRANDE'" v-for="(item, index) in [{}].concat(items)">
-      <div v-if="index === 0" class="row row-head">
-          <span class="col-index">index</span>
-          <span class="col-label">label</span>
-          <span class="col-sent">Sentence</span>
-      </div>
-      <div v-else class="row">
-          <span class="col-index">{{index}}</span>
-          <span class="col-label">{{`${item['option1']}${item['answer']==='1'?'(x)':''}, ${item['option2']}${item['answer']==='2'?'(x)':''}`}}</span>
-          <span class="col-sent">{{item['sentence']}}</span>
-      </div>
+    <template v-if="ds_name === 'WINOGRANDE'">
+      <table class="ui celled table">
+        <thead>
+          <tr>
+            <th class="col-index">Index</th>
+            <th class="col-label">Label</th>
+            <th class="col-sent">Sentence</th>
+        </tr></thead>
+
+        <tbody>
+
+          <template v-for="(item, index) in items.slice(1)">
+          <tr>
+              <td class="col-index">{{index}}</td>
+              <td class="col-label">{{`${item['option1']}${item['answer']==='1'?'(x)':''}, ${item['option2']}${item['answer']==='2'?'(x)':''}`}}</td>
+              <td class="col-sent">{{item['sentence']}}</td>
+          </tr>
+          </template>
+
+        </tbody>
+      </table>
     </template>
 
     <template v-if="ds_name === 'SWAG'" v-for="(item, index) in items.slice(1)">
@@ -393,7 +556,7 @@ export default {
   }
 }
 p {
-  line-height: 130%;
+  line-height: 120%;
 }
 .title {
   font-weight: bold;
@@ -404,6 +567,7 @@ p {
 }
 .d-list {
   .answers {
+    margin: 1rem 0;
     margin-left: 2rem;
     color: #aaa;
     .annotate-id {
@@ -411,18 +575,22 @@ p {
       font-size: 80%;
     }
     > span {
-      margin-right: 1rem;
+      font-size: 0.8em;
+      margin-right: 1em;
+      line-height: 1.3em;
     }
-    div {
-      display: inline-block;
-    }
+
   }
   .answer {
     display: inline-block;
     padding: 0.6rem 0;
     border-bottom: 2px solid #8e81ff8c;
   }
+  .statement {
+    margin: 1em 0;
+  }
   .question {
+    margin: 0;
     margin-left: 2rem;
   }
   .row {
@@ -448,8 +616,12 @@ p {
     padding-right: 1rem;
     word-break: break-word;
   }
+  span.col-sent {
+    line-height: 1.2em;
+  }
   span.col-label {
-    font-size: 80%;
+    // font-size: 80%;
+    color: #999;
   }
   .row.row-head span.col-label {
     font-size: 100%;
@@ -463,11 +635,15 @@ p {
     margin-right: 1.8rem;
     text-align: right;
   }
+  .options {
+    margin: 0 0 1em 1em;
+    color: #999;
+  }
   .option {
     padding: 4px 0 4px 8px;
   }
   .option.gold {
-    background: RGBA(2, 184, 117, 0.50);
+    border-bottom: 2px solid RGBA(2, 184, 117, 0.50);
   }
   .thumbnail {
     position: relative;
